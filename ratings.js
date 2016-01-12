@@ -19,7 +19,7 @@ if (!Date.now) {
 	function renderRatingContainer(type, appId)
 	{
 		var link = createLink(type, appId);
-		var logoUrl = type == 'appstore' ? 'logo-appstore.png' : 'logo-google-play.png';
+		var logoUrl = type == 'appstore' ? 'img/logo-appstore.png' : 'img/logo-google-play.png';
 
 		var html = '<div class="store" id="' + type + '">';
 		html += '<a href="' + link + '" target="_blank"><img src="' + logoUrl + '"></a>';
