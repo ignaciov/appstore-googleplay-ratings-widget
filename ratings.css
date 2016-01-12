@@ -57,12 +57,12 @@
 
 .ratings-container .store .rating .stars li.on 
 {
-	background-image: url("star-on.png");
+	background-image: url("img/star-on.png");
 }
 
 .ratings-container .store .rating .stars li.off
 {
-	background-image: url("star-off.png");
+	background-image: url("img/star-off.png");
 }
 
 
