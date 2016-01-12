@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo</title>
+		<link rel="stylesheet" type="text/css" href="ratings.css">
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="ratings.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function()
+			{
+				// Example with Gmail App
+				$("#gmail").ratings({idApple: '422689480', idAndroid: 'com.google.android.gm', cache: true, mattersApiToken: '2cf90bb7f092c3f5c00280f812f6fe340051f9ca'});		
+
+				$("#facebook").ratings({idApple: '284882215', idAndroid: 'com.facebook.katana', cache: true, mattersApiToken: '2cf90bb7f092c3f5c00280f812f6fe340051f9ca'});		
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Example 1: GMAIL</h1>
+		<div class="clearfix" id="gmail"></div>
+
+		<h1>Example 2: Facebook</h1>
+		<div class="clearfix" id="facebook"></div>
+	</body>
+</html>
