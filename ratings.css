@@ -18,33 +18,31 @@
 
 .ratings-container .store {
 	float: left;
-	/*width: 500px;*/
+	width: 100%;
+	max-width: 450px;
 }
 
 .ratings-container .store a 
 {
 	display: block;
 	float: left;
-	width: 202px;
-	height: 70px;
+	max-width: 202px;
+	width: 100%;
+	max-height: 70px;
 }
 
 .ratings-container .store img {
-	width: 202px;
-	height: 70px;
+	max-width: 202px;
+	width: 100%;
+	max-height: 70px;
 }
 
 .ratings-container .store .rating
 {
-	width: 200px;
-	height: 70px;
+	max-width: 200px;
+	width: 100%;
 	display: inline-block;
 	margin: 15px 0 0 10px;
-}
-
-.ratings-container .store .rating .stars
-{
-	
 }
 
 .ratings-container .store .rating .stars li {
@@ -64,6 +62,3 @@
 {
 	background-image: url("img/star-off.png");
 }
-
-
-
