@@ -58,9 +58,6 @@ if ( !Date.now ) {
 		var containerId = '#' + this.attr( 'id' );
 
 		this.addClass( 'ratings-container' );
-
-		console.log(containerId);
-
 		var html = '';
 
 		if ( !( settings.idApple === undefined )) {
@@ -72,14 +69,11 @@ if ( !Date.now ) {
 			var data = localStorage.getItem(localStorageKey);
 
 			if ( settings.cache == true && data != null ) {
-				console.log("Renderizando AppStore desde cache");
-
 				var jsonData = JSON.parse( data );	
 				var htmlStars = renderRatingWidget( jsonData );
 
 				$(containerId + " #appstore .rating").html( htmlStars );
 			} else {
-				console.log("Renderizando AppStore via Ajax");
 
 				$.ajax({
 				   type: 'GET',
@@ -116,13 +110,11 @@ if ( !Date.now ) {
 			var data = localStorage.getItem(localStorageKey);
 
 			if ( settings.cache == true && data != null ) {
-				console.log("Renderizando GooglePlay desde cache");
 				var jsonData = JSON.parse( data );	
 				var htmlStars = renderRatingWidget( jsonData );
 
 				$(containerId + " #googleplay .rating").html( htmlStars );
 			} else {
-				console.log("Renderizando GooglePlay via AJAX");
 
 				$.ajax({
 				   type: 'GET',
