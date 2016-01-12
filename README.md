@@ -36,7 +36,7 @@ Finally you need to initiate the plugin in your DIV. Here you need to pass some 
 
 ```sh
 $(document).ready(function(){
-    $("#gmail").ratings({idApple: '422689480', idAndroid: 'com.google.android.gm', cache: false});
+    $("#gmail").ratings({idApple: '422689480', idAndroid: 'com.google.android.gm', cache: false, mattersApiToken: '2cf90bb7f092c3f5c00280f812f6fe340051f9ca'});
 })
 ```
 
