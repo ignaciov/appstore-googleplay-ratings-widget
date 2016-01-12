@@ -1,23 +1,18 @@
-if (!Date.now) {
+if ( !Date.now ) {
     Date.now = function() { return new Date().getTime(); }
 }
 
 (function ( $ ) {
 
-	function createLink(type, appId)
-	{
-		if (type == 'appstore')
-		{
+	function createLink( type, appId ) {
+		if (type == 'appstore') {
 			return 'https://itunes.apple.com/ar/app/idoctus/id' + appId;
-		}
-		else
-		{
+		} else {
 			return 'https://play.google.com/store/apps/details?id=' + appId;
 		}
 	}
 
-	function renderRatingContainer(type, appId)
-	{
+	function renderRatingContainer( type, appId ) {
 		var link = createLink(type, appId);
 		var logoUrl = type == 'appstore' ? 'img/logo-appstore.png' : 'img/logo-google-play.png';
 
@@ -30,17 +25,14 @@ if (!Date.now) {
 		return html;	
 	}
 
-	function renderRatingWidget(data)
-	{
-		if (data.stars === undefined || data.count === undefined)
-		{
+	function renderRatingWidget( data ) {
+		if ( data.stars === undefined || data.count === undefined ) {
 			return '';
 		}
 
 		var html = '<ul class="stars clearfix">';
 
-		for (i = 0; i < 5; i++)
-		{
+		for ( i = 0; i < 5; i++ ) {
 			var starClass = i >= data.stars ? 'off' : 'on';
 			html += '<li class="' + starClass + '"></li>';
 		}
@@ -51,12 +43,11 @@ if (!Date.now) {
 		return html;
 	}
 
-	function renderWidgetApple()
-	{
+	function renderWidgetApple() {
 
 	}
  
-    $.fn.ratings = function(options) {
+    $.fn.ratings = function( options ) {
     	var settings = $.extend({
             cache: true,
         }, options );
@@ -64,35 +55,25 @@ if (!Date.now) {
 		var idApple = settings.idApple;
 		var idAndroid = settings.idAndroid;
 		var mattersApiToken = settings.mattersApiToken;
-		var containerId = '#' + this.attr('id');
+		var containerId = '#' + this.attr( 'id' );
 
-		this.addClass('ratings-container');
-
-		console.log(containerId);
-
+		this.addClass( 'ratings-container' );
 		var html = '';
 
-		if (!(settings.idApple === undefined))
-		{
-			var htmlRatingContainer = renderRatingContainer('appstore', idApple);
+		if ( !( settings.idApple === undefined )) {
+			var htmlRatingContainer = renderRatingContainer( 'appstore', idApple );
 
-			this.append(htmlRatingContainer);
+			this.append( htmlRatingContainer );
 
 			var localStorageKey = 'appstore_data_app_' + idApple;
 			var data = localStorage.getItem(localStorageKey);
 
-			if (settings.cache == true && data != null)
-			{
-				console.log("Renderizando AppStore desde cache");
+			if ( settings.cache == true && data != null ) {
+				var jsonData = JSON.parse( data );	
+				var htmlStars = renderRatingWidget( jsonData );
 
-				var jsonData = JSON.parse(data);	
-				var htmlStars = renderRatingWidget(jsonData);
-
-				$(containerId + " #appstore .rating").html(htmlStars);
-			}
-			else
-			{
-				console.log("Renderizando AppStore via Ajax");
+				$(containerId + " #appstore .rating").html( htmlStars );
+			} else {
 
 				$.ajax({
 				   type: 'GET',
@@ -100,11 +81,9 @@ if (!Date.now) {
 					async: true,
 					contentType: "application/json",
 					dataType: 'jsonp',
-					success: function(result)
-					{
+					success: function(result) {
 
-						if (result.results.length > 0)
-						{
+						if ( result.results.length > 0) {
 							var item = result.results[0];
 							
 							var data = {
@@ -116,7 +95,6 @@ if (!Date.now) {
 							localStorage.setItem(localStorageKey, JSON.stringify(data));
 
 							var htmlStars = renderRatingWidget(data);
-
 							$(containerId + " #appstore .rating").html(htmlStars);
 						}
 					}
@@ -124,25 +102,19 @@ if (!Date.now) {
 			}
 		}
 
-		if (!(settings.idAndroid === undefined) && !(settings.mattersApiToken === undefined))
-		{
-			var htmlRatingContainer = renderRatingContainer('googleplay', idAndroid);
-			this.append(htmlRatingContainer);
+		if ( !( settings.idAndroid === undefined ) && !( settings.mattersApiToken === undefined )) {
+			var htmlRatingContainer = renderRatingContainer( 'googleplay',idAndroid );
+			this.append( htmlRatingContainer );
 
 			var localStorageKey = 'googleplay_data_app_' + idApple;
 			var data = localStorage.getItem(localStorageKey);
 
-			if (settings.cache == true && data != null)
-			{
-				console.log("Renderizando GooglePlay desde cache");
-				var jsonData = JSON.parse(data);	
-				var htmlStars = renderRatingWidget(jsonData);
+			if ( settings.cache == true && data != null ) {
+				var jsonData = JSON.parse( data );	
+				var htmlStars = renderRatingWidget( jsonData );
 
-				$(containerId + " #googleplay .rating").html(htmlStars);
-			}
-			else
-			{
-				console.log("Renderizando GooglePlay via AJAX");
+				$(containerId + " #googleplay .rating").html( htmlStars );
+			} else {
 
 				$.ajax({
 				   type: 'GET',
@@ -150,18 +122,17 @@ if (!Date.now) {
 					async: true,
 					contentType: "application/json;charset=ISO-8859-15",
 					dataType: 'jsonp',
-					success: function(result)
-					{
+					success: function( result ) {
 						var data = {
-							stars 		: result.rating,
-							count 		: result.number_ratings,
-							timestamp	: Date.now()
+							stars: result.rating,
+							count: result.number_ratings,
+							timestamp: Date.now()
 						};
 
-						localStorage.setItem(localStorageKey, JSON.stringify(data));
+						localStorage.setItem( localStorageKey, JSON.stringify( data ));
 
 						var htmlStars = renderRatingWidget(data);
-						$(containerId + " #googleplay .rating").html(htmlStars);
+						$( containerId + " #googleplay .rating" ).html( htmlStars );
 					}
 				});
 			}
