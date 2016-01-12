@@ -46,7 +46,7 @@ if (!Date.now) {
 		}
 
 		html += '</ul>';
-		html += '<p>Basado en ' + data.count + ' rating</p>';
+		html += '<p>Based on ' + data.count + ' rating</p>';
 
 		return html;
 	}
