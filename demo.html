@@ -6,12 +6,38 @@
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="ratings.js"></script>
 		<script type="text/javascript">
-			$(document).ready(function()
-			{
-				// Example with Gmail App
-				$("#gmail").ratings({idApple: '422689480', idAndroid: 'com.google.android.gm', cache: true, mattersApiToken: '2cf90bb7f092c3f5c00280f812f6fe340051f9ca'});		
+			$(document).ready(function() {
+			//Gmail App Example
+				$("#gmail").ratings({
+				    Apple: {
+				      'id': '422689480',
+				      'img': 'img/logo-appstore.png',
+				      'url': 'https://itunes.apple.com/es/app/gmail-correo-electronico-google/id422689480?mt=8',
+				    },
+				    Android: {
+				      'id': 'com.google.android.gm',
+				      'img': 'img/logo-appstore.png',
+				      'url': 'https://play.google.com/store/apps/details?id=com.google.android.gm&hl=es',
+				    },
+				    cache: true,
+				    mattersApiToken: '2cf90bb7f092c3f5c00280f812f6fe340051f9ca',
+				  });	
 
-				$("#facebook").ratings({idApple: '284882215', idAndroid: 'com.facebook.katana', cache: true, mattersApiToken: '2cf90bb7f092c3f5c00280f812f6fe340051f9ca'});		
+				//Facebook app example
+				$("#facebook").ratings({
+					Apple: {
+						'id': '284882215',
+					    'img': 'img/logo-appstore.png',
+					    'url': 'https://itunes.apple.com/es/app/facebook/id284882215',
+					},
+					Android: {
+					    'id': 'com.facebook.katana',
+					    'img': 'img/logo-appstore.png',
+					    'url' : 'https://play.google.com/store/apps/details?id=com.facebook.katana',
+					},
+					cache: false,
+					mattersApiToken: '2cf90bb7f092c3f5c00280f812f6fe340051f9ca',
+				});	
 			});
 		</script>
 	</head>
