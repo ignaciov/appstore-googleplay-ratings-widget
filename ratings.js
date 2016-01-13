@@ -4,20 +4,11 @@ if ( !Date.now ) {
 
 (function ( $ ) {
 
-	function createLink( type, appId ) {
-		if (type == 'appstore') {
-			return 'https://itunes.apple.com/ar/app/idoctus/id' + appId;
-		} else {
-			return 'https://play.google.com/store/apps/details?id=' + appId;
-		}
-	}
+	function renderRatingContainer( type, url, logoImg ) {
 
-	function renderRatingContainer( type, appId ) {
-		var link = createLink(type, appId);
-		var logoUrl = type == 'appstore' ? 'img/logo-appstore.png' : 'img/logo-google-play.png';
-
+		//@todo Remove this type (we have to remove the styles too).
 		var html = '<div class="store" id="' + type + '">';
-		html += '<a href="' + link + '" target="_blank"><img src="' + logoUrl + '"></a>';
+		html += '<a href="' + url + '" target="_blank"><img src="' + logoImg + '"></a>';
 		html += '<div class="rating">';
 		html += '</div>';
 		html += '</div>';
@@ -26,6 +17,7 @@ if ( !Date.now ) {
 	}
 
 	function renderRatingWidget( data ) {
+		console.log(data);
 		if ( data.stars === undefined || data.count === undefined ) {
 			return '';
 		}
@@ -42,26 +34,24 @@ if ( !Date.now ) {
 
 		return html;
 	}
-
-	function renderWidgetApple() {
-
-	}
  
     $.fn.ratings = function( options ) {
     	var settings = $.extend({
             cache: true,
         }, options );
 
-		var idApple = settings.idApple;
-		var idAndroid = settings.idAndroid;
-		var mattersApiToken = settings.mattersApiToken;
-		var containerId = '#' + this.attr( 'id' );
+			var containerId = '#' + this.attr( 'id' );
 
 		this.addClass( 'ratings-container' );
 		var html = '';
 
-		if ( !( settings.idApple === undefined )) {
-			var htmlRatingContainer = renderRatingContainer( 'appstore', idApple );
+      //iTunes widget
+		if ( !( settings.Apple === undefined )) {
+			var idApple = settings.Apple.id;
+			var imgApple = settings.Apple.img;
+			var urlApple = settings.Apple.url;
+
+			var htmlRatingContainer = renderRatingContainer( 'appstore', urlApple, imgApple );
 
 			this.append( htmlRatingContainer );
 
@@ -76,7 +66,7 @@ if ( !Date.now ) {
 			} else {
 
 				$.ajax({
-				   type: 'GET',
+          type: 'GET',
 					url: 'https://itunes.apple.com/lookup?id=' + idApple + '&country=es',
 					async: true,
 					contentType: "application/json",
@@ -87,9 +77,9 @@ if ( !Date.now ) {
 							var item = result.results[0];
 							
 							var data = {
-								stars 		: item.averageUserRating,
-								count 		: item.userRatingCount,
-								timestamp	: Date.now() 
+								stars: item.averageUserRating,
+								count: item.userRatingCount,
+								timestamp: Date.now()
 							};
 
 							localStorage.setItem(localStorageKey, JSON.stringify(data));
@@ -102,8 +92,13 @@ if ( !Date.now ) {
 			}
 		}
 
-		if ( !( settings.idAndroid === undefined ) && !( settings.mattersApiToken === undefined )) {
-			var htmlRatingContainer = renderRatingContainer( 'googleplay',idAndroid );
+		if ( !( settings.Android === undefined ) && !( settings.mattersApiToken === undefined )) {
+			var idAndroid = settings.Android.id;
+			var mattersApiToken = settings.mattersApiToken;
+			var imgAndroid = settings.Android.img;
+			var urlAndroid = settings.Android.url;
+
+			var htmlRatingContainer = renderRatingContainer( 'googleplay', urlAndroid, imgAndroid );
 			this.append( htmlRatingContainer );
 
 			var localStorageKey = 'googleplay_data_app_' + idApple;
