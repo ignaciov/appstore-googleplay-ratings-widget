@@ -35,15 +35,35 @@ Then, you need to create a div inside your HTML that will where the widget will 
 Finally you need to initiate the plugin in your DIV. Here you need to pass some data about your application as options.
 
 ```sh
-$(document).ready(function(){
-    $("#gmail").ratings({idApple: '422689480', idAndroid: 'com.google.android.gm', cache: false, mattersApiToken: '2cf90bb7f092c3f5c00280f812f6fe340051f9ca'});
-})
+    //Facebook app example
+    $("#facebook").ratings({
+      Apple: {
+        'id': '284882215',
+        'img': 'img/logo-appstore.png',
+        'url': 'https://itunes.apple.com/es/app/facebook/id284882215',
+      },
+      Android: {
+        'id': 'com.facebook.katana',
+        'img': 'img/logo-appstore.png',
+        'url' : 'https://play.google.com/store/apps/details?id=com.facebook.katana',
+      },
+      cache: false,
+      mattersApiToken: '2cf90bb7f092c3f5c00280f812f6fe340051f9ca',
+    }); 
 ```
 
 Options
 ```sh
-idApple: yourAppleAppId,
-idAndroid: yourAndroidAppId,
+Apple: {
+ id: yourAppleAppId,
+ img: img for show,
+ url: your itunes url (really, any url).
+}
+Android: {
+ id: yourAndroidAppId (format like: com.facebook.katana),
+ img: img for show google play,
+ url: your google play url (really, any url).
+}
 mattersApiToken: your42MattersApiToken
 ```
 
